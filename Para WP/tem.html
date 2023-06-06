@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yachts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .position-relative {
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .instagram-gallery .gallery-item {
+            position: relative;
+            padding-bottom: 100%;
+            overflow: hidden;
+        }
+
+        .instagram-gallery .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="width: 100%;">
+        <!-- Lista de Yates -->
+        <div v-if="mostrar" class="container">
+            <div class="row">
+                <div v-for="yacht in yachts" :key="yacht._id" class="col-md-4 mb-4">
+                    <div class="card">
+                        <img :src="getImageUrl(yacht.imageFrom)" class="card-img-top" alt="Yacht Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ yacht.name }}</h5>
+                            <p class="card-text">Charter Rate: {{ yacht.specifications.length }}</p>
+                            <p class="card-text">Built: {{ yacht.specifications.draft }}</p>
+                            <p class="card-text">Length: {{ yacht.specifications.built }}</p>
+                            <p class="card-text">Guests: {{ yacht.specifications.built }}</p>
+
+                            <button type="button" class="btn btn-primary" v-on:click="negativo(yacht)"> READ MORE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Descripcion del yate -->
+<div v-if="!mostrar">
+    <!-- Header con imagen en grande y nombre -->
+    <div style="margin: 0;">
+      <div class="container-fluid position-relative">
+        <div style="height: 100vh; margin: -15px;">
+          <img :src="getImageUrl(yate.imageFrom)" alt="Imagen" class="img-fluid"
+            style="width: 100%; margin: 0; height: inherit; position: fixed; object-fit: cover;" />
+          <div class="overlay">
+            <p>{{ yate.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid position-relative" style="background-color: white;">
+      <div class="row">
+        <div class="col-6 text-center mt-4">
+          <span><strong>Charter Rate:</strong> {{ yate.specifications.charterRate }}</span><br>
+          <span><strong>Built:</strong> {{ yate.specifications.built }}</span><br>
+          <span><strong>Length:</strong> {{ yate.specifications.length }}</span><br>
+          <span><strong>Guests:</strong> {{ yate.specifications.guests }}</span><br>
+        </div>
+        <div class="col-6 mt-4">
+          <h3>Description</h3>
+          <p>{{ yate.description }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid mt-5">
+      <h3>Gallery</h3>
+      <div class="row instagram-gallery">
+        <div class="col-4 gallery-item" v-for="image in yate.gallery" :key="image.id">
+          <img :src="getImageUrl(image.url)" class="img-fluid" alt="Gallery Image" data-bs-toggle="modal"
+            :data-bs-target="'#modal-' + image.id" />
+          <div class="modal fade" :id="'modal-' + image.id" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img :src="getImageUrl(image.url)" class="img-fluid" alt="Gallery Image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+  <script>
+      new Vue({
+          el: '#app',
+          data: {
+              yachts: [],
+              yate: [], mostrar: true
+          },
+          mounted() {
+              this.fetchYachts();
+          },
+          methods: {
+              fetchYachts() {
+                  fetch('http://localhost:3000/Yachts')
+                      .then(response => response.json())
+                      .then(data => {
+                          this.yachts = data;
+                      })
+                      .catch(error => {
+                          console.error(error);
+                      });
+              },
+              getImageUrl(filename) {
+                  if (filename) {
+                      return `http://localhost:3000/getImage/${filename}`;
+                  } else {
+                      return 'placeholder.jpg';
+                  }
+              }, negativo(yate) {
+                  this.yate = yate
+                  console.log(yate)
+                  this.mostrar = !this.mostrar
+              }
+          }
+      });
+
+
+  </script>
+</body>
+
+</html>  

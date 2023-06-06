@@ -1,0 +1,25 @@
+{
+  "name": "properties",
+  "version": "1.0.0",
+  "description": "esta es una aplicacion para guardar propiedades y luego poder consultarlas desde cualquier medio posible ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yates",
+    "aviones",
+    "yets",
+    "villas",
+    "manciones"
+  ],
+  "author": "OneD",
+  "license": "MIT",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "body-parser": "^1.20.2",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.1"
+  }
+}

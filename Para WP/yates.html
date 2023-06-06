@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yachts</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="app" class="container">    
+    <div class="row">
+      <div v-for="yacht in yachts" :key="yacht._id" class="col-md-4 mb-4">
+        <div class="card">
+          <img :src="getImageUrl(yacht.imageFrom)" class="card-img-top" alt="Yacht Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ yacht.name }}</h5>
+            <p class="card-text">Charter Rate: {{ yacht.specifications.length }}</p>
+            <p class="card-text">Built: {{ yacht.specifications.draft }}</p>
+            <p class="card-text">Length: {{ yacht.specifications.built }}</p>
+            <p class="card-text">Guests: {{ yacht.specifications.built }}</p>
+
+            <button type="button" class="btn btn-primary"> READ MORE</button>
+            <!-- Agrega el resto de las especificaciones aquí -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        yachts: []
+      },
+      mounted() {
+        this.fetchYachts();
+      },
+      methods: {
+        fetchYachts() {
+          fetch('http://localhost:3000/Yachts')
+            .then(response => response.json())
+            .then(data => {
+              this.yachts = data;
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        },
+        getImageUrl(filename) {
+          if (filename) {
+            return `http://localhost:3000/getImage/${filename}`;
+          } else {
+            return 'placeholder.jpg';
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
