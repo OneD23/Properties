@@ -242,7 +242,11 @@
                         <div class="col-12 mt-5 text-center">
                             <strong>KEY FEATURES</strong>
                             <br>
-                            <span>{{yate.keysFeactures}} </span>
+                            <div class="col-md-4 col-lg-3 mb-4" v-for="(key, index) in yate.keysFeactures" :key="index">
+                                {{ key }}
+                              </div>
+                              jj
+                            
                         </div>
                     </div>
                     <div class="row">
