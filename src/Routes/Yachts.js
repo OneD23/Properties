@@ -6,7 +6,7 @@ var controlers = require('../Controllers/Yachts')
 
 var router = express.Router()
 
-var multipartMiddleware = multipart({uploadDir: '../uploads'})
+var multipartMiddleware = multipart({uploadDir: './uploads'})
 
 router.get('/',controlers.List)
 router.post('/save',multipartMiddleware,controlers.save)

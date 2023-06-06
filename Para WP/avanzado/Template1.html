@@ -312,7 +312,7 @@
             },
             methods: {
                 fetchYachts() {
-                    fetch('http://localhost:3000/Yachts')
+                    fetch('https://properties-production.up.railway.app/Yachts')
                         .then(response => response.json())
                         .then(data => {
                             this.yachts = data;
@@ -323,7 +323,7 @@
                 },
                 getImageUrl(filename) {
                     if (filename) {
-                        return `http://localhost:3000/getImage/${filename}`;
+                        return `https://properties-production.up.railway.app/getImage/${filename}`;
                     } else {
                         return 'placeholder.jpg';
                     }
