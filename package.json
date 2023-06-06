@@ -4,7 +4,8 @@
   "description": "esta es una aplicacion para guardar propiedades y luego poder consultarlas desde cualquier medio posible ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index"
   },
   "keywords": [
     "yates",
