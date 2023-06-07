@@ -34,7 +34,7 @@ var controlers = {
         
        const galeria= []
         req.files.gallery.forEach(element => {
-            console.log(element.path.split('\\')[1])
+            console.log(element.path)
             galeria.push(element.path.split('\\')[1])
         });
         Yachts.gallery = galeria 
