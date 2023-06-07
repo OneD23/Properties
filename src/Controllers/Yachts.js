@@ -1,7 +1,8 @@
 'use strict'
 
 var fs = require('fs')
-var modelo = require('../Models/Yachts')
+var modelo = require('../Models/Yachts');
+const { Console } = require('console');
 
 var controlers = {
     save: function (req, res) {
@@ -33,7 +34,8 @@ var controlers = {
         
        const galeria= []
         req.files.gallery.forEach(element => {
-            galeria.push(element.path.split('\\')[2])
+            console.log(element.path.split('\\')[1])
+            galeria.push(element.path.split('\\')[1])
         });
         Yachts.gallery = galeria 
         Yachts.save()
@@ -45,7 +47,7 @@ var controlers = {
                 var fileName = "imagen no subida";
                 if (req.files) {
                     var filePath = req.files.imageFrom.path;
-                    fileName = filePath.split('\\')[2];
+                    fileName = filePath.split('\\')[1];
                     var extencion = fileName.split('.')[1];
 
                     if (extencion == 'png' || extencion == 'jpg' || extencion == 'jpge' || extencion == 'gif') {
