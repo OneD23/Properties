@@ -1,40 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .position-relative {
-          position: relative;
-        }
-      
-        .overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-          font-size: 2rem;
-        }
-      </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+  <title>Document</title>
 </head>
-<body >
-    <div class="container">
-        <div class="position-relative">
-          <img src="https://via.placeholder.com/350x150" alt="Imagen" class="img-fluid" />
+
+<body>
+  <div v-if="!mostrar">
+    <!-- Header con imagen en grande y nombre --->
+    <div style="margin: 0;">
+      <div class="container-fluid position-relative ">
+        <div style="height: 100vh; margin: -15px;">
+          <img :src="getImageUrl(yate.imageFrom)" alt="Imagen" class="img-fluid"
+            style=" width: 100%; margin: 0; height: inherit; position: fixed;  object-fit: cover;" />
           <div class="overlay">
-            <p>Texto encima de la imagen</p>
+            <p> {{yate.name}}</p>
           </div>
         </div>
       </div>
-      
-     
+
+      <div class="container-fluid position-relative" style=" background-color: white;">
+        <div class="row pl-5  ">
+          <div class="col-6 ">
+            <h1>DESCRIPTION: </h1>
+            <hr>
+            <div >
+              <span>
+                The CJ2+ continues the “+” of the CJ line in adding enhancements and upgraded Collins Pro Line 21 such
+                as found in the CJ3. The FADEC controlled FJ44-3A-24 engines of the CJ2+ offer improved efficiency and
+                better performance at altitude compared to the CJ2. Take-off gross weight is also increased versus the
+                CJ2. Other improvements include LED lighting in the cabin, redesigned seats, and updated cabin
+                appointments.
+
+                Cessna announced the CJ2 at the 1998 NBAA convention. Certification of the big brother of the CJ1
+                occurred in 2000. The CJ2 is a CJ1 with almost a three-foot stretch to the cabin length allowing
+                standard seating for six. Like the CJ1 it features the Collins Pro Line 21 EFIS avionics, plus upgraded
+                Williams FJ44-2C engines (with fuel heaters) that produce 2,400 pounds of thrust. It is certificated for
+                single pilot operation.
+
+                The CJ2 is the “more is better” version of the CJ1. More room, more speed, more range and more power
+                have made this, another popular member of the Citation family. Along with the longer, roomier cabin
+                comes an optional aft lavatory.
+
+
+
+                Certification was received in 2005 with deliveries starting in 2006.
+              </span>
+            </div>
+          </div>
+          <div class="col-6 ">
+            <h1>DETAILS</h1>
+            <hr>
+            <Span>PASSAGERS:</Span>
+
+            <br>
+            <Span>CABIN DIMESIONS</Span>
+
+            <br>
+            <Span>RANGE</Span>
+
+            <br>
+            <Span>SPEED</Span>
+
+            <br>
+            <Span>CARGO CAPACITY</Span>
+
+          </div>
+        </div>
+
+        <div class="col-12 mt-5">
+
+          <h1>Gallery</h1>
+          
+          <hr>
+          
+          
+          <div class="row instagram-gallery">
+            <div class="col-md-4 col-lg-3 mb-4" v-for="(image, index) in yate.gallery" :key="index">
+                <div class="gallery-item">
+                    <img :src="getImageUrl(image)" alt="imagen"
+                        class="img-fluid img-thumbnail fixed-size-image">
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
 </body>
+
 </html>

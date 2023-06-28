@@ -5,6 +5,7 @@ var Schema = mongoose.Schema
 var JetSchema = Schema({
     name: String,
     description:String,
+    categoria:String,
     passengers : String,
     cabinDimensions: String,
     range: String,

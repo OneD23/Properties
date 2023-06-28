@@ -5,7 +5,7 @@ var modelo = require('../Models/Jet')
 
 var controlers = {
     save: function (req, res) {
-        const { name, description, passengers, cabinDimensions, range, speed, cargoCapacity, imageFrom, } = req.body;
+        const { name, description, categoria, passengers, cabinDimensions, range, speed, cargoCapacity, imageFrom, } = req.body;
 
         var Jet = new modelo()
 
@@ -17,6 +17,14 @@ var controlers = {
         Jet.speed = speed
         Jet.cargoCapacity = cargoCapacity
         Jet.imageFrom = imageFrom
+        Jet.categoria = categoria
+
+        const galeria= []
+        req.files.gallery.forEach(element => {
+            console.log(element.path)
+            galeria.push(element.path.split('/')[1])
+        });
+        Jet.gallery = galeria 
 
         Jet.save()
             .then(JetSave => {

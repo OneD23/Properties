@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jets</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .position-relative {
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .instagram-gallery .gallery-item {
+            position: relative;
+            padding-bottom: 100%;
+            overflow: hidden;
+        }
+
+        .instagram-gallery .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="width: 100%;">
+        <!-- Lista de Yates -->
+        <div v-if="mostrar" class="container">
+            <div class="row">
+                <div v-for="jet in jets" :key="jet._id" class="col-md-4 mb-4">
+                    <div class="card">
+                        <img :src="getImageUrl(jet.imageFrom)" class="card-img-top" alt="jet Image">
+                        <div class="card-body color-text-grey" style="color: #aaa; ">
+                            <h5 class="card-title" style="color:black;">{{ jet.name }}</h5>
+                            <p class="card-text">Passengers: {{ jet.passengers }}</p>
+                            <p class="card-text">Range: {{ jet.range }}</p>
+                            <p class="card-text">Cabin Capacity: {{ jet.cabinDimensions}}</p>
+                            <p class="card-text">Speed: {{ jet.speed }}</p>
+                            <p class="card-text">Cargo Capacity: {{ jet.cargoCapacity }}</p>   
+                            <button type="button" class="btn btn-outline-secondary" v-on:click="negativo(jet)"> READ
+                                MORE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Descripcion del yate -->
+        <div v-if="!mostrar">
+            <!-- Header con imagen en grande y nombre --->
+            <div style="margin: 0;">
+              <div class="container-fluid position-relative ">
+                <div style="height: 100vh; margin: -15px;">
+                  <img :src="getImageUrl(yate.imageFrom)" alt="Imagen" class="img-fluid"
+                    style=" width: 100%; margin: 0; height: inherit;   object-fit: cover;" />
+                  <div class="overlay">
+                    <p> {{yate.name}}</p>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="container-fluid position-relative" style=" background-color: white;">
+                <div class="row pl-5  ">
+                  <div class="col-6 ">
+                    <h1 class="text-break">DESCRIPTION: </h1>
+                    <hr>
+                    <div >
+                        <p class="text-break">{{yate.description}}</p>
+                    </div>
+                  </div>
+                  <div class="col-6 ">
+                    <h1 class="text-break">DETAILS:</h1>
+                    <hr>
+                    <Span>PASSAGERS:</Span>
+                    <p>{{yate.passengers}}</p>
+                    <br>
+                    <Span>CABIN DIMESIONS:</Span>
+                    <p>{{yate.cabinDimensions}}</p>
+                    <br>
+                    <Span>RANGE:</Span>
+                    <p>{{yate.range}}</p>
+                    <br>
+                    <Span>SPEED:</Span>
+                    <p>{{yate.speed}}</p>
+                    <br>
+                    <Span>CARGO CAPACITY:</Span>
+                    <p>{{yate.cargoCapacity}}</p>
+                  </div>
+                </div>
+        
+                <div class="col-12 mt-5">
+        
+                  <h1>Gallery</h1>
+                  
+                  <hr>
+                  
+                  
+                  <div class="row instagram-gallery">
+                    <div class="col-md-4 col-lg-3 mb-4" v-for="(image, index) in yate.gallery" :key="index">
+                        <div class="gallery-item">
+                            <img :src="getImageUrl(image)" alt="imagen"
+                                class="img-fluid img-thumbnail fixed-size-image">
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+        </body>
+        <!-- Descripcion del yates --->
+        <div class="container-fluid position-relative" style=" background-color: white;">
+            <div class="row">
+                <div class="col-6 items-align-center">
+
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                jets: [],
+                yate: [], mostrar: true
+            },
+            mounted() {
+                this.fetchjets();
+            },
+            methods: {
+                fetchjets() {
+                    fetch('https://properties-production.up.railway.app/jet')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.jets = data;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                },
+                getImageUrl(filename) {
+                    if (filename) {
+                        return `https://properties-production.up.railway.app/getImage/${filename}`;
+                    } else {
+                        return 'placeholder.jpg';
+                    }
+                }, negativo(yate) {
+                    this.yate = yate
+                    console.log(yate)
+                    this.mostrar = !this.mostrar
+                }
+            }
+        });
+
+      
+
+    </script>
+</body>
+
+</html>
