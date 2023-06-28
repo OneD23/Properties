@@ -48,7 +48,7 @@ var controlers = {
                 if (req.files) {
                     var filePath = req.files.imageFrom.path;
                     fileName = filePath.split('/')[1];
-                    var extencion = fileName.split('.')[1];
+                    var extencion = fileName.split('.')[1]; 
 
                     if (extencion == 'png' || extencion == 'jpg' || extencion == 'jpge' || extencion == 'gif') {
                         return modelo.findByIdAndUpdate(YachtsSave._id, { imageFrom: fileName }, { new: true })
