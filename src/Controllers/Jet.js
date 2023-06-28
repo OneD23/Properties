@@ -35,7 +35,7 @@ var controlers = {
                 var fileName = "imagen no subida";
                 if (req.files) {
                     var filePath = req.files.imageFrom.path;
-                    fileName = filePath.split('\\')[1];
+                    fileName = filePath.split('/')[1];
                     var extencion = fileName.split('.')[1];
 
                     if (extencion == 'png' || extencion == 'jpg' || extencion == 'jpge' || extencion == 'gif') {
