@@ -28,7 +28,7 @@ app.use('/Jet',JetRoutes)
 app.use('/Yachts',YachtsRoutes)
 app.use('/getImage/:name', function (req, res) {
     // Lee la imagen del sistema de archivos
-    fs.readFile('./uploads/'+req.params.name, function (err, data) {
+    fs.readFile('.//uploads//'+req.params.name, function (err, data) {
       if (err) {
         // Si hay un error al leer el archivo, envía una respuesta de error
         res.writeHead(500, {'Content-Type': 'text/plain'});
